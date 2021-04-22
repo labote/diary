@@ -9,6 +9,7 @@
 </head>
 <body>
 	<!-- 로그인 전 -->
+
 	<c:if test="${sessionMember == null}">
 		<h1>login</h1>
 		<form action="${pageContext.request.contextPath}/login" method="post">

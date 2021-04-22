@@ -35,6 +35,7 @@ public class MemberService {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			e.printStackTrace();
 		} finally {
 			this.dbUtil.close(null, null, conn);
 		}

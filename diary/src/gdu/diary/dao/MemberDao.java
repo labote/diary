@@ -20,7 +20,7 @@ public class MemberDao {
 		try {
 			conn = this.dbUtil.getConnection();
 			stmt = conn.prepareStatement(MemberQuery.SELECT_MEMBER_BY_KEY);
-			stmt.setInt(1, member.getMemberNo());
+			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
 			rs = stmt.executeQuery();
 			

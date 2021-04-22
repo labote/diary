@@ -5,7 +5,7 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class DBdriverListener implements ServletContextListener {
+public class DBDriverListener implements ServletContextListener {
 
 	// 톰캣 부팅시
 	public void contextInitialized(ServletContextEvent arg0)  { 
@@ -19,7 +19,7 @@ public class DBdriverListener implements ServletContextListener {
     }
 	
 	// 생성자
-    public DBdriverListener() {
+    public DBDriverListener() {
     	
     }
 
