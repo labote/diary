@@ -21,13 +21,16 @@
 				<button type="submit">로그인</button>
 			</div>
 		</form>
+		<a href="${pageContext.request.contextPath}/addMember"><button>회원 가입</button></a>
 	</c:if>
 	
 	<!-- 로그인 후 -->
 	<c:if test="${sessionMember != null}">
 		${sessionMember.memberId} 님 반갑습니다.
-		<div><a href="/auth/">다이어리</a></div>
 		<div><a href="${pageContext.request.contextPath}/auth/logout">로그아웃</a></div>
+		<div><a href="${pageContext.request.contextPath}/auth/modifyMember">정보수정</a></div>
+		<div><a href="${pageContext.request.contextPath}/auth/removeMember">회원탈퇴</a></div>
+		<div><a href="${pageContext.request.contextPath}/auth/diary">diary</a></div>
 	</c:if>
 </body>
 </html>

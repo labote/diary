@@ -10,7 +10,8 @@ public class DBUtil {
 	public Connection getConnection() {
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/diary","root","java1004");
+			conn = DriverManager.getConnection("jdbc:mariadb://localhost:3307/diary","root","java1004");
+			conn.setAutoCommit(false);  // false -> 성공할때까지 갖고 있음
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
