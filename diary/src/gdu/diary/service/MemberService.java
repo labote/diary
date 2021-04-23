@@ -25,7 +25,9 @@ public class MemberService {
 		Connection conn = null;
 		
 		try {
+			// DB 연결 및 SQL 실행
 			conn = this.dbUtil.getConnection();
+			// 중복 체크
 			if(this.memberDao.checkMember(conn, member.getMemberId()) != null) {
 				return false;
 			}
@@ -56,6 +58,7 @@ public class MemberService {
 		Connection conn = null;
 
 		try {
+			// DB 연결 및 SQL 실행
 			conn = this.dbUtil.getConnection();
 			this.todoDao.deleteTodoByMember(conn, member.getMemberNo());
 			this.memberDao.deleteMemberByKey(conn, member);
