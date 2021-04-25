@@ -17,7 +17,35 @@ public class MemberService {
 	// update -> modify 
 	// delete -> remove
 	
-	//
+	// 비밀 번호 변경 서비스
+	public boolean modifyMember(Member member) {
+		// 객체 생성 및 초기화
+		this.dbUtil = new DBUtil();
+		this.memberDao = new MemberDao();
+		Connection conn = null;
+		
+		try {
+			// DB 연결 및 Dao 메서드 실행
+			conn = this.dbUtil.getConnection();
+			this.memberDao.updateMember(conn, member);
+			conn.commit();
+		} catch(Exception e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+			return false;
+		} finally {
+			this.dbUtil.close(null, null, conn);
+		}
+		
+		return true;
+	}
+	
+	// 회원가입 서비스
 	public boolean addMember(Member member) {
 		// 객체 생성 및 초기화
 		this.dbUtil = new DBUtil();
@@ -25,7 +53,7 @@ public class MemberService {
 		Connection conn = null;
 		
 		try {
-			// DB 연결 및 SQL 실행
+			// DB 연결 및 Dao 메서드 실행
 			conn = this.dbUtil.getConnection();
 			// 중복 체크
 			if(this.memberDao.checkMember(conn, member.getMemberId()) != null) {
@@ -58,7 +86,7 @@ public class MemberService {
 		Connection conn = null;
 
 		try {
-			// DB 연결 및 SQL 실행
+			// DB 연결 및 Dao 메서드 실행
 			conn = this.dbUtil.getConnection();
 			this.todoDao.deleteTodoByMember(conn, member.getMemberNo());
 			this.memberDao.deleteMemberByKey(conn, member);
@@ -89,7 +117,7 @@ public class MemberService {
 		Connection conn = null;
 		
 		try {
-			// DB 연결 및 SQL문 실행
+			// DB 연결 및 Dao 메서드 실행
 			conn = dbUtil.getConnection();
 			//conn.setAutoCommit(false);
 			//conn.commit();
