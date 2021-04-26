@@ -33,13 +33,17 @@ public class MemberService {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 			return false;
 		} finally {
-			this.dbUtil.close(null, null, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// this.dbUtil.close(null, null, conn);
 		}
 		
 		return true;
@@ -71,7 +75,13 @@ public class MemberService {
 			e.printStackTrace();
 			return false;
 		} finally {
-			this.dbUtil.close(null, null, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			// this.dbUtil.close(null, null, conn);
 		}
 		
 		return true;
@@ -88,7 +98,7 @@ public class MemberService {
 		try {
 			// DB 연결 및 Dao 메서드 실행
 			conn = this.dbUtil.getConnection();
-			this.todoDao.deleteTodoByMember(conn, member.getMemberNo());
+			this.todoDao.deleteTodoListByMember(conn, member.getMemberNo());
 			this.memberDao.deleteMemberByKey(conn, member);
 			conn.commit();
 		} catch (SQLException e) {
@@ -101,7 +111,12 @@ public class MemberService {
 			e.printStackTrace();
 			return false;
 		} finally {
-			this.dbUtil.close(null, null, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// this.dbUtil.close(null, null, conn);
 		}
 		
 		return true;
@@ -128,12 +143,16 @@ public class MemberService {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
 		} finally { // 할당 해제
-			this.dbUtil.close(null, null, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// this.dbUtil.close(null, null, conn);
 		}
 		
 		return returnMember;

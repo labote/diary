@@ -34,7 +34,13 @@ public class ABService {
 			}
 			e.printStackTrace();
 		} finally {
-			dbUtil.close(null, null, conn);
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// dbUtil.close(null, null, conn);
 		}
 	}
 }

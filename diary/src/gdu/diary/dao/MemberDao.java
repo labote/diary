@@ -16,7 +16,7 @@ public class MemberDao {
 	public int updateMember(Connection conn, Member member) throws SQLException {
 		
 		// 객체 생성 및 초기화
-		this.dbUtil = new DBUtil();
+		// this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 		int rowCnt = 0;
 		
@@ -28,7 +28,8 @@ public class MemberDao {
 			System.out.println("updateMember : " + stmt); // 디버깅
 			stmt.executeUpdate();
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
+			//this.dbUtil.close(null, stmt, null);
 		}
 		
 		return rowCnt;
@@ -38,7 +39,7 @@ public class MemberDao {
 	public String checkMember(Connection conn, String memberId) throws SQLException {
 		
 		// 객체 생성 및 초기화
-		this.dbUtil = new DBUtil();
+		// this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String returnMemberId = null;
@@ -54,7 +55,9 @@ public class MemberDao {
 				returnMemberId = rs.getString("memberId");
 			}
 		} finally {
-			this.dbUtil.close(rs, stmt, null);
+			rs.close();
+			stmt.close();
+			//this.dbUtil.close(rs, stmt, null);
 		}
 		return returnMemberId;
 	}
@@ -63,7 +66,7 @@ public class MemberDao {
 	public int insertMember(Connection conn, Member member) throws SQLException {
 		
 		// 객체 생성 및 초기화
-		this.dbUtil = new DBUtil();
+		// this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 		int rowCnt = 0;
 		
@@ -76,7 +79,8 @@ public class MemberDao {
 			rowCnt = stmt.executeUpdate();
 			
 		} finally {
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
+			// this.dbUtil.close(null, stmt, null);
 		}
 		return rowCnt;
 	}
@@ -85,7 +89,7 @@ public class MemberDao {
 	public int deleteMemberByKey(Connection conn, Member member) throws SQLException {
 		
 		// 객체 생성 및 초기화
-		this.dbUtil = new DBUtil();
+		// this.dbUtil = new DBUtil();
 		PreparedStatement stmt = null;
 		int rowCnt = 0;
 
@@ -97,7 +101,8 @@ public class MemberDao {
 			System.out.println("deleteMemberByKey : " + stmt); // 디버깅
 			rowCnt = stmt.executeUpdate();
 		} finally { // 할당 해제
-			this.dbUtil.close(null, stmt, null);
+			stmt.close();
+			// this.dbUtil.close(null, stmt, null);
 		}
 		
 		return rowCnt;
@@ -108,7 +113,7 @@ public class MemberDao {
 	public Member selectMemberByKey(Connection conn, Member member) throws SQLException {
 		
 		// 객체 생성 및 초기화
-		this.dbUtil = new DBUtil();
+		// this.dbUtil = new DBUtil();
 		Member returnMember = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -128,7 +133,9 @@ public class MemberDao {
 			}
 			
 		} finally { // 할당 해제
-			this.dbUtil.close(rs, stmt, null);
+			rs.close();
+			stmt.close();
+			// this.dbUtil.close(rs, stmt, null);
 		}
 		
 		return returnMember;
