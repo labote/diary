@@ -74,7 +74,7 @@ public class TodoService {
 	}
 	
 	// 해당 Todo를 가져오는 메서드
-	public Todo getTodo(String date, int memberNo) {
+	public Todo getTodo(int todoNo, int memberNo) {
 		// 객체 생성 및 초기화
 		this.todoDao = new TodoDao();
 		this.dbUtil = new DBUtil();
@@ -84,7 +84,7 @@ public class TodoService {
 		try {
 			// DB 연결 및 Dao 호출
 			conn = this.dbUtil.getConnection();
-			returntodo = this.todoDao.selectTodoByDate(conn, date, memberNo);
+			returntodo = this.todoDao.selectTodoByDate(conn, todoNo, memberNo);
 			conn.commit();
 		} catch(Exception e) {
 			try {

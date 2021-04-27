@@ -32,7 +32,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<a href="${pageContext.request.contextPath}/auth/update?todoNo=${todo.todoNo}&targetYear=${todoDate.year}&targetMonth=${todoDate.month}"><button type="button">수정</button></a>
+	<a href="${pageContext.request.contextPath}/auth/modify?todoNo=${todo.todoNo}&targetYear=${todoDate.year}&targetMonth=${todoDate.month}"><button type="button">수정</button></a>
 	<a href="${pageContext.request.contextPath}/auth/removeTodo?todoNo=${todo.todoNo}&targetYear=${todoDate.year}&targetMonth=${todoDate.month}"><button type="button">삭제</button></a>
 	<button type="button" onclick="history.back()">뒤로가기</button>
 	<a href="${pageContext.request.contextPath}/login"><button>홈</button></a>

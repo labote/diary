@@ -5,12 +5,43 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import gdu.diary.vo.Todo;
 
 public class TodoDao {
 
+	// dday select 메서드
+	public List<Map<String,Object>> selectTodoDdayList(Connection conn, int memberNo) throws SQLException {
+		// 객체 생성 및 초기화
+		PreparedStatement stmt = null;
+		List<Map<String,Object>> list = new ArrayList<>();
+		ResultSet rs = null;
+		
+		try {
+			// SQL문 실행
+			stmt = conn.prepareStatement(TodoQuery.SELECT_TODO_DDAY_LIST);
+			stmt.setInt(1, memberNo);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Map<String,Object> map = new HashMap<>();
+				map.put("todoNo", rs.getInt("todoNo"));
+				map.put("todoDate", rs.getString("todoDate"));
+				map.put("todoTitle", rs.getString("todoTitle"));
+				map.put("dday", rs.getInt("dday"));
+				list.add(map);
+			}
+		} finally {
+			stmt.close();
+			if(rs!=null) rs.close();
+		}
+		
+		return list;
+	}
+	
 	// todo update 메서드
 	public int updateTodo(Connection conn, Todo todo) throws SQLException {
 		// 객체 생성 및 초기화
@@ -34,7 +65,7 @@ public class TodoDao {
 	}
 	
 	// oo년 oo월 oo일에 있는 todo를 가져오는 메서드
-	public Todo selectTodoByDate(Connection conn, String date, int memberNo)  throws SQLException {
+	public Todo selectTodoByDate(Connection conn, int todoNo, int memberNo)  throws SQLException {
 		// 객체 생성 및 초기화
 		Todo todo = null;
 		PreparedStatement stmt = null;
@@ -43,7 +74,7 @@ public class TodoDao {
 		try {
 			// SQL문 실행
 			stmt = conn.prepareStatement(TodoQuery.SELECT_TODO_BY_DATE);
-			stmt.setString(1, date);
+			stmt.setInt(1, todoNo);
 			stmt.setInt(2, memberNo);
 			System.out.println("selectTodoByDate : " + stmt);
 			
@@ -61,7 +92,7 @@ public class TodoDao {
 			}
 		} finally { // 할당 해제
 			stmt.close();
-			rs.close();
+			if(rs!=null) rs.close();
 		}
 		
 		return todo;

@@ -8,6 +8,23 @@
 <title>diary</title>
 </head>
 <body>
+	<h1>DDAY LIST</h1>
+	<div>
+		<table border="1">
+			<tr>
+				<th>todoDate</th>
+				<th>todoTitle</th>
+				<th>dday</th>
+			</tr>
+			<c:forEach var="m" items="${diaryMap.ddayList}">
+				<tr>
+					<td>${m.todoDate}</td>
+					<td><a href="${pageContext.request.contextPath}/auth/todoOne?targetYear=${diaryMap.targetYear}&targetMonth=${diaryMap.targetMonth+1}&todoNo=${m.todoNo}">${m.todoTitle}</a></td>
+					<td>-${m.dday}</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
 	<a href="${pageContext.request.contextPath}/auth/diary?targetYear=${diaryMap.targetYear}&targetMonth=${diaryMap.targetMonth-1}">이전달</a>
 	${diaryMap.targetYear}년 ${diaryMap.targetMonth+1}월
 	<a href="${pageContext.request.contextPath}/auth/diary?targetYear=${diaryMap.targetYear}&targetMonth=${diaryMap.targetMonth+1}">다음달</a>
@@ -31,7 +48,7 @@
 							<div>
 								<c:forEach var="todo" items="${diaryMap.todoList}">
 									<c:if test="${todo.todoDate == num}">
-										<div style="background-color: ${todo.todoFontColor}"><a href="${pageContext.request.contextPath}/auth/todoOne?targetYear=${diaryMap.targetYear}&targetMonth=${diaryMap.targetMonth+1}&targetDate=${num}">${todo.todoTitle}...</a></div>
+										<div style="background-color: ${todo.todoFontColor}"><a href="${pageContext.request.contextPath}/auth/todoOne?targetYear=${diaryMap.targetYear}&targetMonth=${diaryMap.targetMonth+1}&targetDate=${num}&todoNo=${todo.todoNo}">${todo.todoTitle}...</a></div>
 										<!-- todoOne 상세정보 - 수정 - 삭제 -->
 									</c:if>
 								</c:forEach>
