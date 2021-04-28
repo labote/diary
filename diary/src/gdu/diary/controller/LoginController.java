@@ -26,14 +26,25 @@ public class LoginController extends HttpServlet {
 	// 로그인 액션
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// request 호출
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
+		
+		// 디버깅
+		System.out.println("memberId : " + memberId);
+		System.out.println("memberPw : " + memberPw);
+		
+		// 의존객체 생성
 		this.memberService = new MemberService();
+		
+		// 전처리
 		Member member = new Member();
 		member.setMemberId(memberId);
 		member.setMemberPw(memberPw);
 		System.out.println("member : " + member);
 		
+		// 서비스 호출
 		Member returnMember = this.memberService.getMemberKey(member);
 		if(returnMember == null) {
 			System.out.println("로그인 실패");
@@ -43,6 +54,8 @@ public class LoginController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionMember", returnMember);
 		}
+		
+		// redirect
 		response.sendRedirect(request.getContextPath()+"/login");
 	}
 }
